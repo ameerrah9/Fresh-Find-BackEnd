@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Maybe seed data with external API
+
+List.create(name: 'Vegetables')
+
+Item.create(content: 'Carrots', list: List.all.sample)
+Item.create(content: 'Squash', list: List.all.sample)
+Item.create(content: 'Cucumber', list: List.all.sample)
+Item.create(content: 'Brocolli', list: List.all.sample)
