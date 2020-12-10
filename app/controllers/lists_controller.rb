@@ -9,7 +9,15 @@ class ListsController < ApplicationController
   end
 
   def create
-    list = list.new(params[:list])
+    # byebug
+    list = List.new(list_params)
+
+    render json: ListSerializer.new(list) if list.save
   end
 
+  private
+
+  def list_params
+    params.require(:list).permit(:content)
+  end
 end

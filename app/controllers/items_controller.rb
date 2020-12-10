@@ -11,4 +11,10 @@ class ItemsController < ApplicationController
   def create
     item = Item.new(params[item])
   end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:content)
+  end
 end
