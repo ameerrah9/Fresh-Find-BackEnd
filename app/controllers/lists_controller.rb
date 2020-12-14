@@ -5,7 +5,6 @@ class ListsController < ApplicationController
   def index
     lists = List.all
     render json: lists
-    # render json: List.all.map { |list| ListSerializer.new(list) }
   end
 
   # get /lists/1
@@ -17,7 +16,6 @@ class ListsController < ApplicationController
 
   # post /lists
   def create
-    byebug
     list = List.new(list_params)
     if list.save
       render json: list

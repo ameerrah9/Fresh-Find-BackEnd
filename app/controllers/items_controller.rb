@@ -17,12 +17,11 @@ class ItemsController < ApplicationController
 
   # post /items
   def create
-    # byebug
     item = Item.new(item_params)
     if item.save
-      render json: item
+      render json: item, status: :accepted
     else
-      render json: item.errors
+      render json: { errors: item.errors.full_messages }, status: :unprocessible_entity
     end
   end
 
@@ -31,7 +30,7 @@ class ItemsController < ApplicationController
 
     if item.destroy
       flash[:success] = 'Fresh item was successfully deleted.'
-      render json: item
+      render json: item, status: :accepted
     else
       flash[:error] = 'Something went wrong'
       render json: item.errors
