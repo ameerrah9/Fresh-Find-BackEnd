@@ -1,26 +1,17 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[show update destroy]
-
   # get /lists
   def index
     lists = List.all
-    render json: lists
-  end
-
-  # get /lists/1
-  def show
-    # list = List.find(params[:id])
-    # render json: ListSerializer.new(list)
-    render json: list
+    render json: ListSerializer.new(lists)
   end
 
   # post /lists
   def create
     list = List.new(list_params)
     if list.save
-      render json: list
+      render json: list, status: :accepted
     else
-      render json: list.errors
+      render json: { errors: list.errors.full_messages }, status: :unprocessible_entity
     end
   end
 
@@ -29,10 +20,10 @@ class ListsController < ApplicationController
 
     if list.destroy
       flash[:success] = 'Fresh List was successfully deleted.'
-      render json: list
+      render json: list, status: :accepted
     else
       flash[:error] = 'Something went wrong'
-      render json: list.errors
+      render json: { errors: list.errors.full_messages }, status: :unprocessible_entity
     end
   end
 

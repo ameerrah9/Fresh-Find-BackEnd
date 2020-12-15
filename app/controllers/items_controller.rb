@@ -1,18 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[show update destroy]
-
   # get /items
   def index
     items = Item.all
-    render json: items
-    # render json: item.all.map { |item| itemSerializer.new(item) }
-  end
-
-  # get /items/1
-  def show
-    # item = item.find(params[:id])
-    # render json: itemSerializer.new(item)
-    render json: item
+    render json: ItemSerializer.new(items)
   end
 
   # post /items
