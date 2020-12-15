@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     if item.save
       render json: item, status: :accepted
     else
-      render json: { errors: item.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: item.errors.full_messages }
     end
   end
 
