@@ -7,11 +7,12 @@ class ListsController < ApplicationController
 
   # post /lists
   def create
+    byebug
     list = List.new(list_params)
     if list.save
-      render json: list, status: :accepted
+      render json: ListSerializer.new(list), status: :accepted
     else
-      render json: { errors: list.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: list.errors.full_messages }
     end
   end
 
@@ -20,10 +21,9 @@ class ListsController < ApplicationController
 
     if list.destroy
       flash[:success] = 'Fresh List was successfully deleted.'
-      render json: list, status: :accepted
     else
       flash[:error] = 'Something went wrong'
-      render json: { errors: list.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: list.errors.full_messages }
     end
   end
 
