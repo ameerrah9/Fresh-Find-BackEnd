@@ -2,14 +2,14 @@ class ItemsController < ApplicationController
   # get /items
   def index
     items = Item.all
-    render json: ItemSerializer.new(items)
+    render json: items
   end
 
   # post /items
   def create
     item = Item.new(item_params)
     if item.save
-      render json: ItemSerializer.new(item), status: :accepted
+      render json: item
     else
       render json: { errors: item.errors.full_messages }
     end

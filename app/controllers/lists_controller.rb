@@ -2,15 +2,14 @@ class ListsController < ApplicationController
   # get /lists
   def index
     lists = List.all
-    render json: ListSerializer.new(lists)
+    render json: lists
   end
 
   # post /lists
   def create
-    byebug
     list = List.new(list_params)
     if list.save
-      render json: ListSerializer.new(list), status: :accepted
+      render json: list, status: :accepted
     else
       render json: { errors: list.errors.full_messages }
     end
