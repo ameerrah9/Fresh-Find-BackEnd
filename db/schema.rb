@@ -14,17 +14,17 @@ ActiveRecord::Schema.define(version: 2020_12_05_223501) do
 
   create_table "items", force: :cascade do |t|
     t.string "content"
-    t.integer "list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["list_id"], name: "index_items_on_list_id"
   end
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
+    t.integer "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_lists_on_item_id"
   end
 
-  add_foreign_key "items", "lists"
+  add_foreign_key "lists", "items"
 end
