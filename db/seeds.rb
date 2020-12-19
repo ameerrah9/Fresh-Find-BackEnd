@@ -10,6 +10,11 @@
 List.destroy_all
 Item.destroy_all
 
-herb = Item.create(content: 'Fresh Rosemary')
-crops = List.create(name: 'Crops', item: herb.id)
+# List
+crops, fruit, vegetables = List.create([{ name: 'Crops' }, { name: 'Fruit' }, { name: 'Vegetables' }])
 
+# Crops Items
+
+crops.items.create([{ content: 'Fresh Rosemary' }, { content: 'Fresh Lavender' }])
+fruit.items.create([{ content: 'Organic Plums' }, { content: 'Bananas' }])
+vegetables.items.create([{ content: 'Cucumbers' }, { content: 'Organic Kale' }])
