@@ -1,10 +1,14 @@
 class ListsController < ApplicationController
   # get /lists
-  def index
-    lists = List.all
-    render json: lists
-  end
-
+    def index
+      lists = List.all
+      render json: ListSerializer.new(lists)
+    end
+  
+    def show
+      list = List.find(params[:id])
+      render json: ListSerializer.new(list).serializable_hash
+    end
   # post /lists
   def create
     list = List.new(list_params)
