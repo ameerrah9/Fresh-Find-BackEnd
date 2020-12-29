@@ -1,15 +1,16 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:destroy]
+
   # get /items
   def index
-    items = Item.all
-    render json: ItemSerializer.new(items)
+    render json: Item.all
   end
 
   # post /items
   def create
     item = Item.new(item_params)
     if item.save
-      render json: ItemSerializer.new(item).serialized_json
+      render json: ItemSerializer.new(item)
     else
       render json: { errors: item.errors.full_messages }
     end
@@ -19,7 +20,7 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id])
 
     if item.destroy
-      render json: { message: "Item deleted"}
+      render json: { message: 'Item deleted' }
     else
       flash[:error] = 'Something went wrong'
       render json: item.errors
@@ -27,6 +28,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def set_item
+    item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:content, :list_id)
