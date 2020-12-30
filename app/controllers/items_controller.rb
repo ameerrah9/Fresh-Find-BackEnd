@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
     if item.destroy
       render json: { message: 'Item deleted' }
     else
-      flash[:error] = 'Something went wrong'
       render json: item.errors
     end
   end

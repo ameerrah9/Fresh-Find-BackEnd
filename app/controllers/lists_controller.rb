@@ -19,9 +19,8 @@ class ListsController < ApplicationController
     list = List.find(params[:id])
 
     if list.destroy
-      flash[:success] = 'Fresh List was successfully deleted.'
+      render json: { message: 'List deleted' }
     else
-      flash[:error] = 'Something went wrong'
       render json: { errors: list.errors.full_messages }
     end
   end
